@@ -34,6 +34,8 @@ public class CachedConfig
 	@Getter private boolean highlightClouds;
 	@Getter private Color cloudColor;
 	@Getter private int cloudDangerRadius;
+	@Getter private boolean showTrimBanners;
+	@Getter private Color trimColor;
 
 	// Debug settings
 	@Getter private int pathLookahead;
@@ -72,6 +74,8 @@ public class CachedConfig
 		highlightClouds = config.highlightClouds();
 		cloudColor = config.cloudColor();
 		cloudDangerRadius = config.cloudDangerRadius();
+		showTrimBanners = config.showTrimBanners();
+		trimColor = config.trimColor();
 
 		pathLookahead = config.pathLookahead();
 		pathfindingEffort = config.pathfindingEffort();

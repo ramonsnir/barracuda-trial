@@ -273,6 +273,31 @@ public interface BarracudaTrialConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "showTrimBanners",
+		name = "Show Trim Banners",
+		description = "Show large pulsing TRIM banners at the top of the screen and under the ship when the sails can be trimmed",
+		section = objectHighlightingSection,
+		position = 5
+	)
+	default boolean showTrimBanners()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "trimColor",
+		name = "Trim Banner",
+		description = "Color for the TRIM banners",
+		section = objectHighlightingSection,
+		position = 6
+	)
+	@Alpha
+	default Color trimColor()
+	{
+		return new Color(0, 255, 0, 255);
+	}
+
+	@ConfigItem(
 		keyName = "showWaypointDetails",
 		name = "Show Waypoint Details",
 		description = "Show detailed waypoint information (type, status, coordinates)",

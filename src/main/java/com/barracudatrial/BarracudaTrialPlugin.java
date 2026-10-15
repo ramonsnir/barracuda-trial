@@ -57,6 +57,9 @@ public class BarracudaTrialPlugin extends Plugin
 	private ProgressTracker progressTracker;
 	private PathPlanner pathPlanner;
 
+	@Getter
+	private SailTrimTracker sailTrimTracker;
+
 	@Override
 	@SuppressWarnings("RedundantThrows")
 	protected void startUp() throws Exception
@@ -70,6 +73,7 @@ public class BarracudaTrialPlugin extends Plugin
 		locationManager = new LocationManager(client, gameState);
 		progressTracker = new ProgressTracker(client, gameState);
 		pathPlanner = new PathPlanner(client, gameState, cachedConfig, clientThread);
+		sailTrimTracker = new SailTrimTracker(client);
 	}
 
 	@Override
@@ -81,6 +85,19 @@ public class BarracudaTrialPlugin extends Plugin
 		gameState.resetAllTemporaryState();
 		gameState.clearLearnedTerrain();
 		pathPlanner.shutdown();
+		sailTrimTracker.clear();
+	}
+
+	@Subscribe
+	public void onGameObjectSpawned(GameObjectSpawned event)
+	{
+		sailTrimTracker.onGameObjectSpawned(event.getGameObject());
+	}
+
+	@Subscribe
+	public void onGameObjectDespawned(GameObjectDespawned event)
+	{
+		sailTrimTracker.onGameObjectDespawned(event.getGameObject());
 	}
 
 	@Subscribe

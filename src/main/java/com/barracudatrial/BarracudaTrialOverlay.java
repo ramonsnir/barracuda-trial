@@ -4,6 +4,7 @@ import com.barracudatrial.game.route.TrialType;
 import com.barracudatrial.rendering.BoatZoneRenderer;
 import com.barracudatrial.rendering.ObjectHighlightRenderer;
 import com.barracudatrial.rendering.PathRenderer;
+import com.barracudatrial.rendering.TrimBannerRenderer;
 import net.runelite.api.Client;
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;
@@ -17,6 +18,7 @@ public class BarracudaTrialOverlay extends Overlay
 	private final BarracudaTrialPlugin plugin;
 	private final PathRenderer pathRenderer;
 	private final ObjectHighlightRenderer highlightRenderer;
+	private final TrimBannerRenderer trimBannerRenderer;
 
 	@Inject
 	public BarracudaTrialOverlay(Client client, BarracudaTrialPlugin plugin, ModelOutlineRenderer modelOutlineRenderer)
@@ -25,6 +27,7 @@ public class BarracudaTrialOverlay extends Overlay
 		var boatZoneRenderer = new BoatZoneRenderer(client, plugin);
 		this.highlightRenderer = new ObjectHighlightRenderer(client, plugin, modelOutlineRenderer, boatZoneRenderer);
 		this.pathRenderer = new PathRenderer(client, plugin);
+		this.trimBannerRenderer = new TrimBannerRenderer(client, plugin);
 
 		setPosition(OverlayPosition.DYNAMIC);
 		setLayer(OverlayLayer.ABOVE_SCENE);
@@ -76,6 +79,11 @@ public class BarracudaTrialOverlay extends Overlay
 		if (cachedConfig.isHighlightObjectives() && trial != null && trial.getTrialType() == TrialType.TEMPOR_TANTRUM)
 		{
 			highlightRenderer.renderRumLocations(graphics);
+		}
+
+		if (cachedConfig.isShowTrimBanners() && plugin.getSailTrimTracker().isTrimAvailable())
+		{
+			trimBannerRenderer.render(graphics);
 		}
 
 		if (cachedConfig.isShowBoatTiles())
