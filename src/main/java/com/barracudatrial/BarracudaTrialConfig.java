@@ -71,6 +71,18 @@ public interface BarracudaTrialConfig extends Config
 
 
 	@ConfigItem(
+		keyName = "temporMarlinRoute",
+		name = "Tempor Marlin Route",
+		description = "Which Marlin route to follow in The Tempor Tantrum.<br>Smoother: the wiki's smoother route.<br>Faster: the wiki's faster route (riskier). Applies from the next trial.",
+		section = pathSection,
+		position = 6
+	)
+	default TemporMarlinRoute temporMarlinRoute()
+	{
+		return TemporMarlinRoute.SMOOTHER;
+	}
+
+	@ConfigItem(
 		keyName = KEY_PATH_LOOKAHEAD,
 		name = "Route Lookahead",
 		description = "Number of shipments to path ahead. Higher values plan further but use more CPU.",

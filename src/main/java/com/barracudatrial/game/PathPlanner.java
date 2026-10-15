@@ -1,6 +1,7 @@
 package com.barracudatrial.game;
 
 import com.barracudatrial.CachedConfig;
+import com.barracudatrial.TemporMarlinRoute;
 import com.barracudatrial.game.route.*;
 import com.barracudatrial.pathfinding.AStarPathfinder;
 import com.barracudatrial.pathfinding.BarracudaTileCostCalculator;
@@ -198,6 +199,13 @@ public class PathPlanner
 
 		Difficulty difficulty = State.getCurrentDifficulty(client);
 		List<RouteWaypoint> staticRoute = trial.getRoute(difficulty);
+
+		if (trial.getTrialType() == TrialType.TEMPOR_TANTRUM
+			&& difficulty == Difficulty.MARLIN
+			&& cachedConfig.getTemporMarlinRoute() == TemporMarlinRoute.FASTER)
+		{
+			staticRoute = TemporTantrumRoutes.getFasterMarlinRoute();
+		}
 
 		if (staticRoute == null || staticRoute.isEmpty())
 		{

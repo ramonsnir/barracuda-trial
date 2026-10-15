@@ -15,6 +15,7 @@ public class CachedConfig
 	// Path settings
 	@Getter private boolean showOptimalPath;
 	@Getter private RouteOptimization routeOptimization;
+	@Getter private TemporMarlinRoute temporMarlinRoute;
 	@Getter private Color pathColor;
 	@Getter private int pathWidth;
 	@Getter private boolean showPathTiles;
@@ -55,6 +56,7 @@ public class CachedConfig
 	{
 		showOptimalPath = config.showOptimalPath();
 		routeOptimization = config.routeOptimization();
+		temporMarlinRoute = config.temporMarlinRoute();
 		pathColor = config.pathColor();
 		pathWidth = config.pathWidth();
 		showPathTiles = config.showPathTiles();
