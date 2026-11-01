@@ -154,30 +154,10 @@ public class ObjectHighlightRenderer
 
 	public void renderRocks(Graphics2D graphics)
 	{
-		var cached = plugin.getCachedConfig();
-		Color borderColor = cached.getRockColor();
-		Color fillColor = new Color(borderColor.getRed(), borderColor.getGreen(), borderColor.getBlue(), 90);
-		Stroke stroke = new BasicStroke(cached.getRockOutlineWidth());
-
-		WorldView topLevelWorldView = client.getTopLevelWorldView();
-		if (topLevelWorldView == null)
-		{
-			return;
-		}
-
+		Color rockColor = plugin.getCachedConfig().getRockColor();
 		for (WorldPoint rockTile : plugin.getGameState().getKnownRockLocations())
 		{
-			LocalPoint localPoint = RenderingUtils.localPointFromWorldIncludingExtended(topLevelWorldView, rockTile);
-			if (localPoint == null)
-			{
-				continue;
-			}
-
-			Polygon tilePolygon = Perspective.getCanvasTilePoly(client, localPoint);
-			if (tilePolygon != null)
-			{
-				OverlayUtil.renderPolygon(graphics, tilePolygon, borderColor, fillColor, stroke);
-			}
+			renderTileHighlightAtWorldPoint(graphics, rockTile, rockColor, null);
 		}
 	}
 
