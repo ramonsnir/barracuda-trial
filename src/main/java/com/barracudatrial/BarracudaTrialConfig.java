@@ -294,7 +294,7 @@ public interface BarracudaTrialConfig extends Config
 	@Alpha
 	default Color rockColor()
 	{
-		return new Color(255, 0, 255, 255); // Magenta: stands out against water
+		return new Color(255, 0, 255, 255);
 	}
 
 	@ConfigItem(
